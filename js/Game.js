@@ -36,7 +36,7 @@ class Game {
     grass = new Group();
 
     // Adding fuel sprite in the game
-    this.addSprites(bush, 4, bushImage, 0.02);
+    this.addSprites(bush, 4, bushImage, 0.09);
 
     // Adding coin sprite in the game
     this.addSprites(grass, 18, grassImage, 0.09);
@@ -89,16 +89,13 @@ class Game {
         if (index === player.index) {
           stroke(10);
           //fill the circle with color
-            fill("red");
-        //add the ellipse to create a focus for the player 
+          fill("red");
+          //add the ellipse to create a focus for the player 
 
-            ellipse(x, y, 60, 60);
-          
-      
-
+          ellipse(x, y, 60, 60);
           this.handleBush(index);
           this.handleGrass(index);
-        }
+
          }
       }
 
@@ -111,28 +108,27 @@ class Game {
       drawSprites();
     }
   }
- 
-  handleBush(index) 
-  {     // Write a overlap function  for animal and bush    
-      bush[index - 1].overlap(animal1,animal2,       
-        function(collector, collected)        
-        {           //remove the bush        
-           collected.remove();      
-        });        
-          
-          
+
+  handleBush(index) {
+    // Write a overlap function  for animal and bush 
+    animals[index - 1].overlap(bush,       
+      function(collector, collected)        
+      {           //remove the bush        
+         collected.remove();      
+      });        
+       //remove the bush
   }
 
-
-  handleGrass(index)
-  {
-   
-      grass[index - 1].overlap(animal1,animal2, 
-        function(collector, collected)
-      {
-        collected.remove();
-        
-      });
+  handleGrass(index) {
+    
+      player.update();
+    // Write a overlap function  for animal and grass
+    animals[index - 1].overlap(grass, 
+      function(collector, collected)
+    {
+      collected.remove();
+      
+    });
+       //remove the grass
   }
-
-
+}
